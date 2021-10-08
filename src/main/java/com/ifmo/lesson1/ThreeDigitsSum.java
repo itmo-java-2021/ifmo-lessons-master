@@ -14,7 +14,7 @@ public class ThreeDigitsSum {
     }
 
     public static int sum(int n) {
-        // TODO implement
+
         String str = Integer.toString(n);
         int sum = 0;
         for (int i = 0; i < str.length(); i++){
