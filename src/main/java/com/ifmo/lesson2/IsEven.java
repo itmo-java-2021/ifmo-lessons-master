@@ -18,7 +18,6 @@ public class IsEven {
                 case 1 -> "Нечетное";
                 default -> "";
         };
-
         return res;
     }
 }

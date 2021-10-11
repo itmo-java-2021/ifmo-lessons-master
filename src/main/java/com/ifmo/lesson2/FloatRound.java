@@ -7,9 +7,7 @@ public class FloatRound {
      */
     public static void main(String[] args) {
         float n = -1.550437F;
-
         float rounded = round(n);
-
         System.out.println(rounded);
     }
 

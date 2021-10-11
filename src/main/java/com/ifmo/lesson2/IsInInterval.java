@@ -14,7 +14,6 @@ public class IsInInterval {
         int rnd = randomInt();
 
         String inInterval = isInInterval(rnd);
-
         System.out.println(inInterval);
     }
 
