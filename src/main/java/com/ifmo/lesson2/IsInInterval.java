@@ -13,13 +13,13 @@ public class IsInInterval {
     public static void main(String[] args) {
         int rnd = randomInt();
         String inInterval = isInInterval(rnd);
-        
+
         System.out.println(inInterval);
     }
 
     public static int randomInt() {
         Random random = new Random();
-        return random.nextInt(155) + 5;
+        return random.nextInt(145) + 5;
     }
 
     public static String isInInterval(int rnd) {
