@@ -6,7 +6,7 @@ public class IsEven {
     записанное в переменную n, чётным либо нечётным.
      */
     public static void main(String[] args) {
-        int n = 24;
+        int n = 29;
 
         System.out.println(isEven(n));
     }
@@ -19,6 +19,6 @@ public class IsEven {
                 default -> "";
         };
 
-        return "Четное";
+        return res;
     }
 }
