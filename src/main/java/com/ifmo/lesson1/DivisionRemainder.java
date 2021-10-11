@@ -15,8 +15,6 @@ public class DivisionRemainder {
     }
 
     public static void calculate(int q, int w) {
-        // TODO implement
-
         int i = q / w;
         int r = q % w;
 
