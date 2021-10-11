@@ -17,7 +17,7 @@ public class UnluckyNumbers {
         int count = 0;
         for (int i = 1; i < 100000; i++) {
             String str = String.format("%5s", Integer.toString(i)).replace(' ', '0');
-            if (str.contains("3") || str.contains("13")){
+            if (str.contains("4") || str.contains("13")){
                 count++;
             }
         }
