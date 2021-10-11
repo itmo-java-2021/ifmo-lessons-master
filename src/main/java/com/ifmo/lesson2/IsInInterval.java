@@ -13,6 +13,7 @@ public class IsInInterval {
     public static void main(String[] args) {
         int rnd = randomInt();
         String inInterval = isInInterval(rnd);
+        
         System.out.println(inInterval);
     }
 
