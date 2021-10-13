@@ -22,7 +22,6 @@ public class Random4 {
     }
 
     public static int[] randomNumbers() {
-
         return object.Random.getArray(4, 10, 99);
     }
 
