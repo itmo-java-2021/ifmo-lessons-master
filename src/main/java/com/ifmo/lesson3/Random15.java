@@ -19,7 +19,6 @@ public class Random15 {
     }
 
     public static int[] randomNumbers() {
-
         return object.Random.getArray(15, 0, 9);
     }
 

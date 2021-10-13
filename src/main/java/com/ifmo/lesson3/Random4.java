@@ -22,7 +22,7 @@ public class Random4 {
     }
 
     public static int[] randomNumbers() {
-        return getArray(4, 10, 99);
+        return object.Random.getArray(4, 10, 99);
     }
 
     public static boolean isIncreasingSequence(int[] randomNumbers) {
@@ -33,15 +33,5 @@ public class Random4 {
         }
 
         return true;
-    }
-
-    public static int[] getArray(int length, int min, int max){
-        java.util.Random random = new java.util.Random();
-        int[] vs = new int[length];
-        for (int i = 0; i < length; i++) {
-            vs[i] = random.nextInt(max - min) + min;
-        }
-
-        return  vs;
     }
 }
