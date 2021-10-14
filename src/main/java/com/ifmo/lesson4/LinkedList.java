@@ -39,10 +39,10 @@ public class LinkedList {
      * или {@code null}, если не найдено.
      */
     public Object get(int i) {
+        if(head == null){
+            return null;
+        }
         if (i == 0){
-            if(head == null){
-                return null;
-            }
             return head.value;
         } else {
             Item current = head;
@@ -64,10 +64,10 @@ public class LinkedList {
      * @return Удаленное значение или {@code null}, если не найдено.
      */
     public Object remove(int i) {
+        if(head == null){
+            return null;
+        }
         if (i == 0){
-            if(head == null){
-                return null;
-            }
             Item current = head;
             head = current.next;
             return current.value;
