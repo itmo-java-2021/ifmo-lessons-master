@@ -59,7 +59,7 @@ public class Library {
     public boolean put(Book book, int quantity) {
         for (int i = 0; i < count; i++) {
             Books books = (Books)this.books.get(i);
-            if (book.author == books.book.author && book.title == books.book.title){
+            if (book.author.equals(books.book.author) && book.title.equals(books.book.title)){
                 books.count += quantity;
                 return true;
             }
@@ -86,7 +86,7 @@ public class Library {
 
         for (int i = 0; i < count; i++) {
             Books books = (Books)this.books.get(i);
-            if (book.author == books.book.author && book.title == books.book.title){
+            if (book.author.equals(books.book.author) && book.title.equals(books.book.title)){
                 int count2 = books.count;
                 books.count -= quantity;
                 if (books.count <=0 ){
