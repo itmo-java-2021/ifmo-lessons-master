@@ -99,6 +99,7 @@ public class LinkedList implements List, Stack, Queue {
 
             @Override
             public Object next() {
+                if (!this.hasNext()) throw new IndexOutOfBoundsException("End of list.");
                 Item current = this.current;
                 this.current = current.next;
                 return current.value;
