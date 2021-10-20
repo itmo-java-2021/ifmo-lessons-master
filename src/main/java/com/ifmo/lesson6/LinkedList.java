@@ -10,11 +10,6 @@ import java.util.Iterator;
 public class LinkedList implements List, Stack, Queue {
     /** Ссылка на первый элемент списка. */
     private Item head;
-    private int count;
-
-    public LinkedList() {
-        count = 0;
-    }
 
     /** {@inheritDoc} */
     @Override
@@ -33,7 +28,6 @@ public class LinkedList implements List, Stack, Queue {
                 }
             }
         }
-        count++;
     }
 
     /** {@inheritDoc} */
@@ -83,7 +77,6 @@ public class LinkedList implements List, Stack, Queue {
                 current = current.next;
             }
             last.next = current.next;
-            count--;
             return current.value;
         }
     }
@@ -117,13 +110,26 @@ public class LinkedList implements List, Stack, Queue {
     @Override
     public void push(Object value) {
         this.add(value);
-        count++;
     }
 
     /** {@inheritDoc} */
     @Override
     public Object pop() {
-
-        return this.remove(count - 1);
+        if(head == null){
+            return null;
+        } else if (head.next == null){
+            Item current = head;
+            head = null;
+            return current;
+        } else {
+            Item current = head.next;
+            Item last = head;
+            while (current.next != null) {
+                last = current;
+                current = current.next;
+            }
+            last.next = null;
+            return current.value;
+        }
     }
 }
