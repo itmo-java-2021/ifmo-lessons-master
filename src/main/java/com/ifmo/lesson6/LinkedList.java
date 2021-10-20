@@ -120,7 +120,7 @@ public class LinkedList implements List, Stack, Queue {
         } else if (head.next == null){
             Item current = head;
             head = null;
-            return current;
+            return current.value;
         } else {
             Item current = head.next;
             Item last = head;
