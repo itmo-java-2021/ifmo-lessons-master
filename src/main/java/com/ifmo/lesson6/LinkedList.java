@@ -108,7 +108,7 @@ public class LinkedList implements List, Stack, Queue {
             public Object next() {
                 Item current = this.current;
                 this.current = current.next;
-                return current;
+                return current.value;
             }
         };
     }

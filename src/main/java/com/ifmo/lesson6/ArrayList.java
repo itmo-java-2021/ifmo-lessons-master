@@ -42,7 +42,6 @@ public class ArrayList implements List {
     /** {@inheritDoc} */
     @Override
     public void add(Object val) {
-        // TODO implement.
         if (values.length == size){
             Object[] vs = new Object[size + 10];
             for (int i = 0; i < values.length; i++) {
@@ -57,7 +56,6 @@ public class ArrayList implements List {
     /** {@inheritDoc} */
     @Override
     public Object get(int i) {
-        // TODO implement.
         if (i >= size){
             return  null;
         } else {
@@ -68,7 +66,6 @@ public class ArrayList implements List {
     /** {@inheritDoc} */
     @Override
     public Object remove(int i) {
-        // TODO implement.
         if (i >= size){
             return  null;
         } else {
@@ -84,7 +81,6 @@ public class ArrayList implements List {
     /** {@inheritDoc} */
     @Override
     public Iterator iterator() {
-        // TODO implement.
 
         return new Iterator() {
             private int currentIndex = 0;
