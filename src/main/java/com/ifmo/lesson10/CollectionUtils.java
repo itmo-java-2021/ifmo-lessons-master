@@ -6,8 +6,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class CollectionUtils {
+    @SafeVarargs
     public static <T> Iterable<T> view(Iterable<T>...iterables) {
-        ListView vs = new ListView<Iterable<T>>();
+        ListView<Iterable<T>, T> vs = new ListView<>();
+        for (Iterable<T> item: iterables) {
+            vs.add(item);
+        }
+        return vs;
+    }
+
+    @SafeVarargs
+    public static <T, R> Iterable<R> view(Transformer<T, R> transformer, Iterable<T>...iterables) {
+        ListView<Iterable<T>, R> vs = new ListView<>(transformer);
         for (Iterable<T> item: iterables) {
             vs.add(item);
         }
@@ -36,15 +46,26 @@ public class CollectionUtils {
             System.out.println(iterator.next()); // 1, 2, 3, 4, 5, 6, 7
         }
 
+        System.out.println("====");
+
         for (String s : view) {
             System.out.println(s); // 1, 2, 3, 4, 5, 6, 7
         }
 
         System.out.println("====");
 
-        list1.add(0, "0");
+        list1.add(0, "000");
 
         for (String s : view) {
+            System.out.println(s); // 0, 1, 2, 3, 4, 5, 6, 7
+        }
+
+
+        Iterable<Integer> view2 = view(s -> Integer.valueOf(s), list1, list2, list3);
+
+        System.out.println("====");
+
+        for (Integer s : view2) {
             System.out.println(s); // 0, 1, 2, 3, 4, 5, 6, 7
         }
     }
