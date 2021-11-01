@@ -110,7 +110,7 @@ public class TopWords {
     public static <T> Map<T, Integer> GetMaxCount(Map<T, Count> map, int length){
         Count[] counts = map.values().stream().sorted((x, y) -> Integer.compare(y.count, x.count)).toArray(Count[]::new);
 
-        HashMap<T, Integer> maps = new HashMap<>(10);
+        HashMap<T, Integer> maps = new HashMap<>(length);
         for (int i = 0; i < length; i++) {
             Count<T> count = counts[i];
             maps.put(count.word, count.count);
