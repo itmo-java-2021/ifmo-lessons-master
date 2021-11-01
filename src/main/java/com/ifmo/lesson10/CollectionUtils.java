@@ -68,5 +68,6 @@ public class CollectionUtils {
         for (Integer s : view2) {
             System.out.println(s); // 0, 1, 2, 3, 4, 5, 6, 7
         }
+        
     }
 }
