@@ -80,7 +80,12 @@ public class SimpleCalc {
                         result = parseOperand(arg1) + parseOperand(arg2);
                     }
                     catch (CalcException e){
-                        result = map.get(arg1) + parseOperand(arg2);
+                        try {
+                            result = map.get(arg1) + parseOperand(arg2);
+                        }
+                        catch (NullPointerException e1){
+                            throw new CalcException("variable not found, set variable", e1);
+                        }
                     }
                     return result;
 
@@ -89,7 +94,12 @@ public class SimpleCalc {
                         result = parseOperand(arg1) - parseOperand(arg2);
                     }
                     catch (CalcException e){
-                        result = map.get(arg1) - parseOperand(arg2);
+                        try {
+                            result = map.get(arg1) - parseOperand(arg2);
+                        }
+                        catch (NullPointerException e1){
+                            throw new CalcException("variable not found, set variable", e1);
+                        }
                     }
                     return result;
 
