@@ -105,7 +105,7 @@ public class SimpleCalc {
 
                 case EQUALS:
                     map.put(arg1, parseOperand(arg2));
-                    return 0;
+                    return parseOperand(arg2);
             }
 
             throw new CalcException("Unsupported operator: " + this);
