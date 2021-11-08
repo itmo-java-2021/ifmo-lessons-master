@@ -66,6 +66,21 @@ public class SimpleCalc {
         }
     }
 
+    private static int parseOperand(String string, Map<String, Integer> map) throws CalcException {
+        int result = 0;
+        try {
+//            if (map == null){
+//                return parseOperand(string);
+//            } else {
+//                return map.get(string);
+//            }
+        }
+        catch (NullPointerException e){
+            throw new CalcException("variable not found, set variable", e);
+        }
+        return result;
+    }
+
     private enum OPERATOR {
         PLUS, MINUS, EQUALS;
 
@@ -76,32 +91,10 @@ public class SimpleCalc {
             switch (this) {
 
                 case PLUS:
-                    try {
-                        result = parseOperand(arg1) + parseOperand(arg2);
-                    }
-                    catch (CalcException e){
-                        try {
-                            result = map.get(arg1) + parseOperand(arg2);
-                        }
-                        catch (NullPointerException e1){
-                            throw new CalcException("variable not found, set variable", e1);
-                        }
-                    }
-                    return result;
+                    return parseOperand(arg1, map) + parseOperand(arg2, map);
 
                 case MINUS:
-                    try {
-                        result = parseOperand(arg1) - parseOperand(arg2);
-                    }
-                    catch (CalcException e){
-                        try {
-                            result = map.get(arg1) - parseOperand(arg2);
-                        }
-                        catch (NullPointerException e1){
-                            throw new CalcException("variable not found, set variable", e1);
-                        }
-                    }
-                    return result;
+                    return parseOperand(arg1, map) - parseOperand(arg2, map);
 
                 case EQUALS:
                     map.put(arg1, parseOperand(arg2));
