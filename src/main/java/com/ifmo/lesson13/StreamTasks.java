@@ -59,7 +59,7 @@ public class StreamTasks {
         return people
                 .collect(Collectors.groupingBy(o -> o.country, Collectors.counting()))
                 .entrySet().parallelStream()
-                .sorted((o1, o2) -> o2.getValue().compareTo(o1.getValue()))
+                .sorted((o1, o2) -> o1.getValue().compareTo(o2.getValue()))
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
     }
