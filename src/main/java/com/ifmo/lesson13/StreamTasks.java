@@ -55,6 +55,7 @@ public class StreamTasks {
     // Метод возвращает страны в порядке убывания их населения.
     public static List<String> countriesSortedByTheirPopulationDescending(Stream<Person> people) {
 
+
         return people
                 .collect(Collectors.groupingBy(o -> o.country, Collectors.counting()))
                 .entrySet().parallelStream()
