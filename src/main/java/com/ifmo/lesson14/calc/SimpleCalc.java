@@ -68,17 +68,27 @@ public class SimpleCalc {
 
     private static int parseOperand(String string, Map<String, Integer> map) throws CalcException {
         int result = 0;
-        try {
-//            if (map == null){
-//                return parseOperand(string);
-//            } else {
-//                return map.get(string);
-//            }
+
+        try{
+            result = parseOperand(string);
         }
-        catch (NullPointerException e){
-            throw new CalcException("variable not found, set variable", e);
+        catch (CalcException e){
+            try{
+                result = map.get(parseArg(string));
+            }
+            catch (NullPointerException e1){
+                throw new CalcException("variable not found, set variable", e1);
+            }
         }
+
         return result;
+    }
+
+    private static String parseArg(String string) throws CalcException {
+        if (!string.matches("^[A-Za-z0-9]+$")){
+            throw new CalcException("a variable can only consist of Latin letters and numbers");
+        }
+        return string;
     }
 
     private enum OPERATOR {
@@ -97,7 +107,7 @@ public class SimpleCalc {
                     return parseOperand(arg1, map) - parseOperand(arg2, map);
 
                 case EQUALS:
-                    map.put(arg1, parseOperand(arg2));
+                    map.put(parseArg(arg1), parseOperand(arg2));
                     return parseOperand(arg2);
             }
 
