@@ -11,21 +11,24 @@ import java.util.List;
  */
 public class IOStreamTasks {
     public static void main(String[] args) {
+        String path = "c:\\Users\\matveychukiv\\source\\Java\\lesson\\test";
 
         try {
-            List<File> files = split("c:\\Users\\U\\Documents\\java\\test\\test.txt", "c:\\Users\\U\\Documents\\java\\test", 20);
+            List<File> files = split(path + "\\test.txt", path, 20);
 
-            try(InputStream inputStream = new FileInputStream("c:\\Users\\U\\Documents\\java\\test\\test.txt");
-                OutputStream outputStream = new FileOutputStream("c:\\Users\\U\\Documents\\java\\test\\test2.txt")){
+            try(InputStream inputStream = new FileInputStream(path + "\\test.txt");
+                OutputStream outputStream = new FileOutputStream(path + "\\test2.txt")){
                 copy(inputStream, outputStream);
             }
 
-            assembly(files, new File("c:\\Users\\U\\Documents\\java\\test\\test3.txt"));
+            assembly(files, new File(path + "\\test3.txt"));
 
-            try(InputStream inputStream = new FileInputStream("c:\\Users\\U\\Documents\\java\\test\\test.txt");
-                OutputStream outputStream = new FileOutputStream("c:\\Users\\U\\Documents\\java\\test\\test4.txt")){
+            try(InputStream inputStream = new FileInputStream(path + "\\test.txt");
+                OutputStream outputStream = new FileOutputStream(path + "\\test4.txt")){
                 encrypt(inputStream, outputStream, "lol");
             }
+
+            encrypt(new File(path + "\\test.txt"), new File(path + "\\test5.txt"), new File(path + "\\key.txt"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -70,7 +73,7 @@ public class IOStreamTasks {
                 File file1 = new File(dstDir + "\\" + i +".txt");
                 files.add(file1);
                 try (OutputStream write = new FileOutputStream(file1.getPath())){
-                    write.write(buffer);
+                    write.write(buffer, 0, len);
                 }
             }
 
@@ -105,9 +108,14 @@ public class IOStreamTasks {
      * @throws IOException Будет выброшен в случае ошибки.
      */
     public static void encrypt(InputStream src, OutputStream dst, String passphrase) throws IOException {
-        byte[] key = passphrase.getBytes();
 
-        byte[] buffer = new byte[1024];
+        encrypt(src, dst, passphrase.getBytes());
+    }
+
+    public static void encrypt(InputStream src, OutputStream dst, byte[] key) throws IOException {
+        int q = 1024 % key.length;
+        int lenBuffer = q > 0 ? q * key.length : key.length;
+        byte[] buffer = new byte[lenBuffer];
         int len;
         while ((len = src.read(buffer)) > 0)
         {
@@ -125,6 +133,19 @@ public class IOStreamTasks {
      * @throws IOException Будет выброшен в случае ошибки.
      */
     public static void encrypt(File src, File dst, File key) throws IOException {
+        try (InputStream inputStream = new FileInputStream(src.getPath());
+             InputStream inputKey = new FileInputStream(key.getPath());
+             ByteArrayOutputStream readKey = new ByteArrayOutputStream();
+             OutputStream outputStream = new FileOutputStream(dst.getPath())){
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = inputKey.read(buffer)) > 0)
+            {
+                readKey.write(buffer, 0, len);
+            }
 
+            encrypt(inputStream, outputStream, readKey.toByteArray());
+
+        }
     }
 }
