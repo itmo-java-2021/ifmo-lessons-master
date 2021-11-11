@@ -1,7 +1,5 @@
 package com.ifmo.lesson15;
 
-import com.ifmo.lesson3.EncryptArray;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,10 +69,10 @@ public class IOStreamTasks {
                 int len  = reader.read(buffer);
                 if (len == -1) break;
                 File file1 = new File(dstDir + "\\" + i +".txt");
-                files.add(file1);
                 try (OutputStream write = new FileOutputStream(file1.getPath())){
                     write.write(buffer, 0, len);
                 }
+                files.add(file1);
             }
 
         }
@@ -119,7 +117,7 @@ public class IOStreamTasks {
         int len;
         while ((len = src.read(buffer)) > 0)
         {
-            EncryptArray.encrypt(buffer, key);
+            com.ifmo.lesson3.EncryptArray.encrypt(buffer, key);
             dst.write(buffer, 0, len);
         }
     }
