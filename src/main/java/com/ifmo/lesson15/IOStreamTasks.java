@@ -12,7 +12,7 @@ public class IOStreamTasks {
         String path = "c:\\Users\\matveychukiv\\source\\Java\\lesson\\test";
 
         try {
-            List<File> files = split(path + "\\test.txt", path, 20);
+            List<File> files = split(new File(path + "\\test.txt"), new File(path), 20);
 
             try(InputStream inputStream = new FileInputStream(path + "\\test.txt");
                 OutputStream outputStream = new FileOutputStream(path + "\\test2.txt")){
@@ -61,7 +61,7 @@ public class IOStreamTasks {
      * @return Список файлов-частей в том порядке, в котором они должны считываться.
      * @throws IOException Будет выброшен в случае ошибки.
      */
-    public static List<File> split(String file, String dstDir, int size) throws IOException {
+    public static List<File> split(File file, File dstDir, int size) throws IOException {
         List<File> files = new ArrayList<>();
         try(InputStream reader = new FileInputStream(file);){
             for (int i = 0; ; i++) {
