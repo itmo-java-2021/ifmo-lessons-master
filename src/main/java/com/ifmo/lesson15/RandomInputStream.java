@@ -1,5 +1,6 @@
 package com.ifmo.lesson15;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Random;
@@ -11,19 +12,19 @@ import java.util.Random;
 public class RandomInputStream extends InputStream {
     private final Random random;
     private final long length;
-    private long count;
+    private long countL;
 
     public RandomInputStream(Random random, long length) {
         this.random = random;
         this.length = length;
-        count = 0;
+        countL = 0;
     }
 
     @Override
     public int read() throws IOException {
-        if (count < length){
-            count++;
-            return random.nextInt(Byte.MAX_VALUE - Byte.MIN_VALUE) + Byte.MIN_VALUE;
+        if (countL < length){
+            countL++;
+            return random.nextInt(255);
         }
         return -1;
     }
