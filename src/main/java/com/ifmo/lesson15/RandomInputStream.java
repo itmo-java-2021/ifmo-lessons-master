@@ -19,6 +19,6 @@ public class RandomInputStream extends InputStream {
 
     @Override
     public int read() throws IOException {
-        return random.nextInt((int) length);
+        return random.nextInt(Byte.MAX_VALUE - Byte.MIN_VALUE) + Byte.MIN_VALUE;
     }
 }
