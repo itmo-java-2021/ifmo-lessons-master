@@ -11,6 +11,7 @@ import java.util.Random;
 public class RandomInputStream extends InputStream {
     private final Random random;
     private final long length;
+    private long count;
 
     public RandomInputStream(Random random, long length) {
         this.random = random;
@@ -19,6 +20,10 @@ public class RandomInputStream extends InputStream {
 
     @Override
     public int read() throws IOException {
-        return random.nextInt(Byte.MAX_VALUE - Byte.MIN_VALUE) + Byte.MIN_VALUE;
+        if (count < length){
+            count++;
+            return random.nextInt(Byte.MAX_VALUE - Byte.MIN_VALUE) + Byte.MIN_VALUE;
+        }
+        return -1;
     }
 }
