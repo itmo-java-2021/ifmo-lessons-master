@@ -41,7 +41,6 @@ public class IOStreamTasks {
      * @throws IOException Будет выброшен в случае ошибки.
      */
     public static void copy(InputStream src, OutputStream dst) throws IOException {
-        // TODO implement
         byte[] buffer = new byte[1024];
         int len;
         while ((len = src.read(buffer)) > 0)
