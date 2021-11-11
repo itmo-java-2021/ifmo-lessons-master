@@ -16,6 +16,7 @@ public class RandomInputStream extends InputStream {
     public RandomInputStream(Random random, long length) {
         this.random = random;
         this.length = length;
+        count = 0;
     }
 
     @Override
