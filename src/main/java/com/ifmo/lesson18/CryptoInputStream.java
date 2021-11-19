@@ -32,12 +32,31 @@ public class CryptoInputStream extends FilterInputStream {
 
     @Override
     public int read() throws IOException {
-        byte b = (byte) ((byte)super.read() ^ key[nextKey]);
-        if (key.length - 1 == nextKey){
-            nextKey = 0;
+        int res = super.read();
+        if (res == -1){
+            return res;
         } else {
-            nextKey++;
+            int b = res ^ key[nextKey];
+            if (key.length - 1 == nextKey){
+                nextKey = 0;
+            } else {
+                nextKey++;
+            }
+            return b;
         }
-        return b;
+    }
+
+    @Override
+    public int read(byte[] b, int off, int len) throws IOException {
+        int lenght = super.read(b, off, len);
+        for (int i = 0; i < b.length; i++) {
+            b[i] ^= key[nextKey];
+            if (key.length - 1 == nextKey){
+                nextKey = 0;
+            } else {
+                nextKey++;
+            }
+        }
+        return lenght;
     }
 }
