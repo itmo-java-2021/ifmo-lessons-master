@@ -24,7 +24,6 @@ public class CryptoOutputStream extends FilterOutputStream {
     private byte[] key;
 
     public CryptoOutputStream(OutputStream out, byte[] key) {
-
         super(out);
         this.key = key;
     }
