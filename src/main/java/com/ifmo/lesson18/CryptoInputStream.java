@@ -22,15 +22,22 @@ public class CryptoInputStream extends FilterInputStream {
      */
 
     private byte[] key;
+    private int nextKey;
 
     public CryptoInputStream(InputStream in, byte[] key) {
         super(in);
         this.key = key;
+        this.nextKey = 0;
     }
 
     @Override
-    public int read(byte[] b, int off, int len) throws IOException {
-        EncryptArray.encrypt(b, key);
-        return super.read(b, off, len);
+    public int read() throws IOException {
+        int b = (byte)super.read() ^ key[nextKey];
+        if (key.length - 1 == nextKey){
+            nextKey = 0;
+        } else {
+            nextKey++;
+        }
+        return b;
     }
 }

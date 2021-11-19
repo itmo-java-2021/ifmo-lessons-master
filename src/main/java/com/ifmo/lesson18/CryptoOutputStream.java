@@ -22,15 +22,22 @@ public class CryptoOutputStream extends FilterOutputStream {
      */
 
     private byte[] key;
+    private int nextKey;
 
     public CryptoOutputStream(OutputStream out, byte[] key) {
         super(out);
         this.key = key;
+        this.nextKey = 0;
     }
 
     @Override
-    public void write(byte[] b, int off, int len) throws IOException {
-        EncryptArray.encrypt(b, key);
-        super.write(b, off, len);
+    public void write(int b) throws IOException {
+        b = (byte)b ^ key[nextKey];
+        super.write(b);
+        if (key.length - 1 == nextKey){
+            nextKey = 0;
+        } else {
+            nextKey++;
+        }
     }
 }
