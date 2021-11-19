@@ -21,7 +21,7 @@ public class CryptoOutputStream extends FilterOutputStream {
      * @param key Ключ шифрования.
      */
 
-    private byte[] key;
+    private final byte[] key;
     private int nextKey;
 
     public CryptoOutputStream(OutputStream out, byte[] key) {
@@ -32,12 +32,12 @@ public class CryptoOutputStream extends FilterOutputStream {
 
     @Override
     public void write(int b) throws IOException {
-        b = (byte)b ^ key[nextKey];
-        super.write(b);
+        byte b1 = (byte) ((byte)b ^ key[nextKey]);
         if (key.length - 1 == nextKey){
             nextKey = 0;
         } else {
             nextKey++;
         }
+        super.write(b1);
     }
 }

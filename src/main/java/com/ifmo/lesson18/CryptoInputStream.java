@@ -32,7 +32,7 @@ public class CryptoInputStream extends FilterInputStream {
 
     @Override
     public int read() throws IOException {
-        int b = (byte)super.read() ^ key[nextKey];
+        byte b = (byte) ((byte)super.read() ^ key[nextKey]);
         if (key.length - 1 == nextKey){
             nextKey = 0;
         } else {
