@@ -30,7 +30,8 @@ public class CryptoOutputStream extends FilterOutputStream {
 
     @Override
     public void write(int b) throws IOException {
-        super.write(b ^ key[nextKey]);
+        b ^= key[nextKey];
+        super.write(b);
         if (key.length - 1 == nextKey){
             nextKey = 0;
         } else {
