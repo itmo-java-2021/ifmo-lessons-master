@@ -1,5 +1,7 @@
 package com.ifmo.lesson18;
 
+import com.ifmo.lesson3.EncryptArray;
+
 import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -20,7 +22,6 @@ public class CryptoOutputStream extends FilterOutputStream {
      */
 
     private byte[] key;
-    private int nextKey;
 
     public CryptoOutputStream(OutputStream out, byte[] key) {
 
@@ -29,13 +30,8 @@ public class CryptoOutputStream extends FilterOutputStream {
     }
 
     @Override
-    public void write(int b) throws IOException {
-        b ^= key[nextKey];
-        super.write(b);
-        if (key.length - 1 == nextKey){
-            nextKey = 0;
-        } else {
-            nextKey++;
-        }
+    public void write(byte[] b, int off, int len) throws IOException {
+        EncryptArray.encrypt(b, key);
+        super.write(b, off, len);
     }
 }
