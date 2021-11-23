@@ -22,6 +22,6 @@ public class Books {
 
     @Override
     public int hashCode() {
-        return Objects.hash(book);
+        return book.hashCode();
     }
 }

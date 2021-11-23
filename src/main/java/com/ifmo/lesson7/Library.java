@@ -60,19 +60,17 @@ public class Library {
      * @return {@code True} if book successfully added, {@code false} otherwise.
      */
     public boolean put(Book book, int quantity) {
-        for (int i = 0; i < count; i++) {
-            Books books = (Books)this.books.get(i);
-            if (book.author.equals(books.book.author) && book.title.equals(books.book.title)){
-                books.count += quantity;
-                return true;
-            }
+        Books books = (Books)this.books.get(book);
+        if (books != null){
+            books.count += quantity;
+            return true;
         }
 
         if (count >= max){
             return false;
         } else {
-            Books books = new Books(book, quantity);
-            this.books.add(books);
+            Books books2 = new Books(book, quantity);
+            this.books.add(books2);
             count++;
             return true;
         }
@@ -86,18 +84,16 @@ public class Library {
      * @return Actual number of books taken.
      */
     public int take(Book book, int quantity) {
-        for (int i = 0; i < count; i++) {
-            Books books = (Books)this.books.get(i);
-            if (book.author.equals(books.book.author) && book.title.equals(books.book.title)){
-                int count2 = books.count;
-                books.count -= quantity;
-                if (books.count <=0 ){
-                    this.books.remove(i);
-                    count--;
-                    return count2;
-                }
-                return quantity;
+        Books books = (Books)this.books.get(new Books(book, 2));
+        if (books != null){
+            int count2 = books.count;
+            books.count -= quantity;
+            if (books.count <=0 ){
+                this.books.remove(books);
+                count--;
+                return count2;
             }
+            return quantity;
         }
         return 0;
     }
